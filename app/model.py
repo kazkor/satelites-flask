@@ -15,7 +15,11 @@ def get_pred(model,image_path):
 
     predictions = model.predict(img_array)
 
-    return predictions
+    index_of_max_value = np.argmax(predictions)
+
+    max_value = np.max(predictions)
+
+    return predictions, index_of_max_value, max_value
 
 
 def get_model():

@@ -31,13 +31,7 @@ def upload_file():
     file_path = f'static/temporary/{filename}'
     file.save(file_path)
 
-    predictions = get_pred(model=model, image_path=file_path)
-    
-    index_of_max_value = np.argmax(predictions)
-
-    max_value = np.max(predictions)
-
-    print(max_value)
+    predictions, index_of_max_value, max_value = get_pred(model=model, image_path=file_path)
 
     data = {
         "pred": str(predictions),
