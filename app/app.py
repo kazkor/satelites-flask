@@ -8,6 +8,7 @@ app = Flask(__name__)
 def home():
 
     data = data = {"pred": "",
+                    "class_names":class_names,
                     "max": "" }
     return render_template('index.html',user_data = data)
 
@@ -25,7 +26,8 @@ def upload_file():
     index_of_max_value = np.argmax(predictions)
 
     data = {"pred":str(predictions),
-                    "max": f"{class_names[str(index_of_max_value)]}: {np.argmax(predictions)} "}
+            "class_names":class_names,
+            "max": f"{class_names[str(index_of_max_value)]}: {np.argmax(predictions)} "}
     
     return render_template('index.html', user_data=data)
 
