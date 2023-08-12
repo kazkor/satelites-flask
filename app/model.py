@@ -9,7 +9,7 @@ from PIL import Image
 
 def get_pred(model):
     image_path = ""
-    img = image.load_img(image_path, target_size=(64, 64))
+    img = image.load_img(image_path, target_size=(128, 128))
     img_array = image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
 
@@ -19,7 +19,7 @@ def get_pred(model):
 
 
 def get_pred(model,image_path):
-    img = image.load_img(image_path, target_size=(64, 64))
+    img = image.load_img(image_path, target_size=(128, 128))
     img_array = image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
 
@@ -28,7 +28,7 @@ def get_pred(model,image_path):
     return predictions
 
 def get_model():
-    return load_model('model.h5')
+    return load_model('app/models/model_128.h5')
 
 
 def get_classes():
