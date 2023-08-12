@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask Template with JSON Example</title>
+</head>
+<body>
+    <h1>Hello, Flask!</h1>
+    <p>This is a template that includes JSON data.</p>
+    
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Select a file:</label>
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Upload">
+    </form>
+
+    <h2>User Information</h2>
+    <p>Pred: {{ user_data.pred }}</p>
+    <p>Max: {{ user_data.max }}</p>
+    <p>Occupation: {{ user_data.occupation }}</p>
+</body>
+</html>
