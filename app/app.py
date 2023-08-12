@@ -35,11 +35,16 @@ def upload_file():
     
     index_of_max_value = np.argmax(predictions)
 
+    max_value = np.max(predictions)
+
+    print(max_value)
+
     data = {
         "pred": str(predictions),
         "class_names": class_names,
         "uploaded_image": url_for('static', filename=f'temporary/{filename}'),
-        "max": f"{class_names[str(index_of_max_value)]}"
+        "max": f"{class_names[str(index_of_max_value)]}",
+        "max_value":max_value
     }
     
     return render_template('index.html', user_data=data)
