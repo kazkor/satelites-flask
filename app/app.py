@@ -5,7 +5,9 @@ app = Flask(__name__)
 @app.route('/')
 def home():
 
-    return render_template('index.html')
+    data = data = {"pred": "",
+                    "max": "" }
+    return render_template('index.html',user_data = data)
 
 
 @app.route('/upload', methods=['POST'])
