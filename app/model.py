@@ -7,16 +7,6 @@ import io
 from werkzeug.utils import secure_filename
 from PIL import Image
 
-def get_pred(model):
-    image_path = ""
-    img = image.load_img(image_path, target_size=(128, 128))
-    img_array = image.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)
-
-    predictions = model.predict(img_array)
-
-    return predictions
-
 
 def get_pred(model,image_path):
     img = image.load_img(image_path, target_size=(128, 128))
@@ -33,8 +23,6 @@ def get_model():
     model_path = os.path.join(script_dir, "models", "model_128.h5")
     return load_model(model_path)
 
-
-import os
 
 def get_classes():
     # Get the directory of the current script
