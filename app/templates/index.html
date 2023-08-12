@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Flask Template with JSON Example</title>
+    <title>Satelite Pictures Classifier</title>
     <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
     <div class="container">
         <div class="left-column">
-            <h1>Hello, Flask!</h1>
-            <p>This is a template that includes JSON data.</p>
+            <h1>Satelite Pictures Classifier</h1>
+            <p>Upload your picture to get prediction!</p>
             
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <label for="file">Select a file:</label>
@@ -30,7 +30,7 @@
                     {% endfor %}
                 {% endif %}
             </ul>
-            <p>Max: {{ user_data.max }} : {{ user_data.max_value }}</p>
+            <p>Max: {{ user_data.max }} : {{ user_data.max_value }}%</p>
         </div>
     </div>
 </body>
