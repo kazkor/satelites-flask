@@ -6,7 +6,7 @@ import os
 import io
 from werkzeug.utils import secure_filename
 from PIL import Image
-
+import numpy as np
 
 def get_pred(model,image_path):
     img = image.load_img(image_path, target_size=(128, 128))
