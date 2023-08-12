@@ -13,6 +13,9 @@
         <input type="submit" value="Upload">
     </form>
 
+    <img src="{{ user_data.uploaded_image }}" alt="Uploaded Image" width="256" height="256">
+
+
     <h3>Class Names:</h3>
     <ul>
         {% set class_name_list = user_data.class_names.values()|list %}

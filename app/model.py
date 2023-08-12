@@ -52,7 +52,10 @@ def get_classes():
 def file_handler(file_storage):
     uploaded_file = file_storage
     file_content = uploaded_file.read()
-    filename = "perm.png"
+    
+    # Set the filename to "temp01.png"
+    filename = "temp01.png"
+    
     save_directory = "app/static/temporary/"
     full_path = os.path.join(save_directory, filename)
 
@@ -68,5 +71,3 @@ def file_handler(file_storage):
             img.save(full_path)
     else:
         print("Uploaded file is not an image.")
-
-    # Now the picture is saved as PNG at the specified location
