@@ -33,7 +33,7 @@ def get_model():
 
 def get_classes():
     # Wczytanie danych z pliku JSON
-    with open("/Users/karolkozlowski/cnn-satelites-1/class_labels.json", 'r') as json_file:
+    with open("app/static/class_labels.json", 'r') as json_file:
         loaded_data = json.load(json_file)
 
     # Teraz 'loaded_data' zawiera wczytane dane jako słownik
