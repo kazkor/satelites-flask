@@ -1,0 +1,22 @@
+{
+    "0": "beach",
+    "1": "bridge",
+    "2": "cloud",
+    "3": "commercial_area",
+    "4": "dense_residential",
+    "5": "desert",
+    "6": "forest",
+    "7": "freeway",
+    "8": "industrial_area",
+    "9": "island",
+    "10": "lake",
+    "11": "meadow",
+    "12": "mountain",
+    "13": "parking_lot",
+    "14": "railway",
+    "15": "rectangular_farmland",
+    "16": "river",
+    "17": "sea_ice",
+    "18": "sparse_residential",
+    "19": "wetland"
+}
