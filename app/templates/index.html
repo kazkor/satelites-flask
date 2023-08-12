@@ -2,51 +2,80 @@
 <html>
 <head>
     <title>Flask Template with JSON Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            width: 800px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .left-column, .right-column {
+            padding: 20px;
+        }
+        .left-column {
+            flex: 1;
+        }
+        .right-column {
+            flex: 1;
+            border-left: 1px solid #ddd;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        img {
+            width: 100%;
+            max-width: 256px;
+            height: auto;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, Flask!</h1>
-    <p>This is a template that includes JSON data.</p>
-    
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="file">Select a file:</label>
-        <input type="file" name="file" id="file">
-        <input type="submit" value="Upload">
-    </form>
+    <div class="container">
+        <div class="left-column">
+            <h1>Hello, Flask!</h1>
+            <p>This is a template that includes JSON data.</p>
+            
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="file">Select a file:</label>
+                <input type="file" name="file" id="file">
+                <input type="submit" value="Upload">
+            </form>
 
-    <img src="{{ user_data.uploaded_image }}" alt="Uploaded Image" width="256" height="256">
-
-
-    <h3>Class Names:</h3>
-    <ul>
-        {% set class_name_list = user_data.class_names.values()|list %}
-    
-        {% if class_name_list|length >= 20 %}
-            {% set predictions_str = user_data.pred %}
-            {% set predictions_list = predictions_str.strip('[]').split() %}
-            <p>{{ class_name_list[0] }} : {{ predictions_list[0] }}</p>
-            <p>{{ class_name_list[1] }} : {{ predictions_list[1] }}</p>
-            <p>{{ class_name_list[2] }} : {{ predictions_list[2] }}</p>
-            <p>{{ class_name_list[3] }} : {{ predictions_list[3] }}</p>
-            <p>{{ class_name_list[4] }} : {{ predictions_list[4] }}</p>
-            <p>{{ class_name_list[5] }} : {{ predictions_list[5] }}</p>
-            <p>{{ class_name_list[6] }} : {{ predictions_list[6] }}</p>
-            <p>{{ class_name_list[7] }} : {{ predictions_list[7] }}</p>
-            <p>{{ class_name_list[8] }} : {{ predictions_list[8] }}</p>
-            <p>{{ class_name_list[9] }} : {{ predictions_list[9] }}</p>
-            <p>{{ class_name_list[10] }} : {{ predictions_list[10] }}</p>
-            <p>{{ class_name_list[11] }} : {{ predictions_list[11] }}</p>
-            <p>{{ class_name_list[12] }} : {{ predictions_list[12] }}</p>
-            <p>{{ class_name_list[13] }} : {{ predictions_list[13] }}</p>
-            <p>{{ class_name_list[14] }} : {{ predictions_list[14] }}</p>
-            <p>{{ class_name_list[15] }} : {{ predictions_list[15] }}</p>
-            <p>{{ class_name_list[16] }} : {{ predictions_list[16] }}</p>
-            <p>{{ class_name_list[17] }} : {{ predictions_list[17] }}</p>
-            <p>{{ class_name_list[18] }} : {{ predictions_list[18] }}</p>
-            <p>{{ class_name_list[19] }} : {{ predictions_list[19] }}</p>
-
-        {% endif %}
-    </ul>
-
-    <p>Max: {{ user_data.max }} : {{ user_data.max_value }}</p>
+            <img src="{{ user_data.uploaded_image }}" alt="Uploaded Image">
+        </div>
+        <div class="right-column">
+            <h3>Class Names:</h3>
+            <ul>
+                {% set class_name_list = user_data.class_names.values()|list %}
+                {% set predictions_list = user_data.pred.strip('[]').split() %}
+            
+                {% if class_name_list|length >= 20 %}
+                    {% for index in range(20) %}
+                        <li>{{ class_name_list[index] }} : {{ predictions_list[index] }}</li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+            <p>Max: {{ user_data.max }} : {{ user_data.max_value }}</p>
+        </div>
+    </div>
 </body>
 </html>
