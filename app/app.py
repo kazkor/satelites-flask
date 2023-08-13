@@ -10,14 +10,16 @@ app = Flask(__name__, static_folder='static')
 @app.route('/')
 def home():
 
-    data = data = {"pred": "",
+    predictions = [0 for _ in range(20)]
+    
+    data = data = {"pred": str(predictions),
                     "class_names":class_names,
                     "max": "",
                     "max_value":"" }
                     
     return render_template('index.html',user_data = data)
 
-@app.route('/upload', methods=['POST', 'GET'])
+@app.route('/upload', methods=['POST'])
 def upload_file():
     
     file = request.files['file']

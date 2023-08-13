@@ -28,13 +28,13 @@
                     <ul>
                         {% for index in range(20) %}
                             {% set prediction_value = predictions_list[index]|float %}
-                            {% set formatted_prediction = "%.5f" % prediction_value %}
+                            {% set formatted_prediction = "%.4f" % prediction_value %}
                             <li>{{ class_name_list[index] }} : {{ formatted_prediction }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
             </ul>
-            <p>Max: {{ user_data.max }} : {{ user_data.max_value * 100 }}%</p>
+            <p>Max: {{ user_data.max }} : {{ user_data.max_value}}%</p>
         </div>
     </div>
 </body>
