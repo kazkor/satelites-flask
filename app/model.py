@@ -8,20 +8,6 @@ from werkzeug.utils import secure_filename
 from PIL import Image
 import numpy as np
 
-def get_pred(model,image_path):
-    img = image.load_img(image_path, target_size=(128, 128))
-    img_array = image.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)
-
-    predictions = model.predict(img_array)
-
-    index_of_max_value = np.argmax(predictions)
-
-    max_value = np.max(predictions)
-
-    return predictions, index_of_max_value, max_value
-
-
 def get_model():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(script_dir, "models", "model_128.h5")
@@ -39,6 +25,19 @@ def get_classes():
 
     return loaded_data
 
+def get_pred(model,image_path):
+    img = image.load_img(image_path, target_size=(128, 128))
+    img_array = image.img_to_array(img)
+    img_array = tf.expand_dims(img_array, 0)
+
+    predictions = model.predict(img_array)
+
+    index_of_max_value = np.argmax(predictions)
+
+    max_value = np.max(predictions)
+
+    return predictions, index_of_max_value, max_value
+    
 
 def file_handler(file):
 
@@ -48,7 +47,3 @@ def file_handler(file):
     file.save(file_path)
 
     return file_path, file_name
-
-
-
-
