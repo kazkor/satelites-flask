@@ -34,10 +34,10 @@ def get_pred(model,image_path):
 
     index_of_max_value = np.argmax(predictions)
 
-    max_value = np.max(predictions)
+    max_value = round((np.max(predictions))*100,2)
 
     return predictions, index_of_max_value, max_value
-    
+
 
 def file_handler(file):
 
