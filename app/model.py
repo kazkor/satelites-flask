@@ -40,26 +40,15 @@ def get_classes():
     return loaded_data
 
 
+def file_handler(file):
 
-def file_handler(file_storage):
-    uploaded_file = file_storage
-    file_content = uploaded_file.read()
-    
-    # Set the filename to "temp01.png"
-    filename = "temp01.png"
-    
-    save_directory = "app/static/temporary/"
-    full_path = os.path.join(save_directory, filename)
+     # Save the uploaded file to a temporary location
+    file_name = secure_filename(file.filename)
+    file_path = f'static/temporary/{file_name}'
+    file.save(file_path)
 
-    # Create the 'temporary' directory if it doesn't exist
-    os.makedirs(save_directory, exist_ok=True)
+    return file_path, file_name
 
-    if uploaded_file.content_type.startswith('image/'):
-        img = Image.open(io.BytesIO(file_content))
-        if img.format != 'PNG':
-            img = img.convert('RGBA')
-            img.save(full_path, format='PNG')
-        else:
-            img.save(full_path)
-    else:
-        print("Uploaded file is not an image.")
+
+
+
