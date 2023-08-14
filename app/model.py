@@ -8,13 +8,16 @@ from werkzeug.utils import secure_filename
 from PIL import Image
 import numpy as np
 
+
+# Loading model from file
 def get_model():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(script_dir, "models", "model_128.h5")
     return load_model(model_path)
 
-
+# Getting a class names from json file
 def get_classes():
+
     # Get the directory of the current script
     script_dir = os.path.dirname(os.path.abspath(__file__))
     class_labels_path = os.path.join(script_dir, "static", "class_labels.json")
@@ -25,20 +28,27 @@ def get_classes():
 
     return loaded_data
 
+# Getting predictions from the model, name of the chosen class and value of it
 def get_pred(model,image_path):
+
+    # loading an image
     img = image.load_img(image_path, target_size=(128, 128))
     img_array = image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
 
+    # predictions array
     predictions = model.predict(img_array)
 
+    # index for class name 
     index_of_max_value = np.argmax(predictions)
 
+    # value of highest prediction
     max_value = round((np.max(predictions))*100,2)
 
     return predictions, index_of_max_value, max_value
 
 
+# Handling the uploaded file
 def file_handler(file):
 
      # Save the uploaded file to a temporary location
