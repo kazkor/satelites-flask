@@ -5,7 +5,11 @@ import time
 import os
 from werkzeug.utils import secure_filename
 
+UPLOAD_FOLDER = 'app/static/temporary'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
 app = Flask(__name__, static_folder='static')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Home
 @app.route('/')
@@ -22,27 +26,40 @@ def home():
                     
     return render_template('index.html',user_data = data)
 
-@app.errorhandler(404)
-def handle_404_error(_error):
-    return make_response(jsonify({"error":"Not found"}),404)
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 # Upload
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['GET','POST'])
 def upload_file():
-    
-    # fetching file from client request
-    file = request.files['file']
-    
-    # handling a file
-    file_path, file_name = file_handler(file)
+    if request.method == 'POST':
+        # fetching file from client request
+        file = request.files['file']
 
-    # getting predictions
-    predictions, index_of_max_value, max_value = get_pred(model=model, image_path=file_path)
+        if file.filename == '':
+            return jsonify({"error":"no file"})
+            
+        if file and allowed_file(file.filename):
 
-    data = create_response(predictions, class_names, file_name, index_of_max_value, max_value)
-    
-    return render_template('index.html', user_data=data)
+            # handling a file
+            file_path, file_name = file_handler(file)
+
+            # getting predictions
+            predictions, index_of_max_value, max_value = get_pred(model=model, image_path=file_path)
+
+            # creating response
+            data = create_response(predictions, class_names, file_name, index_of_max_value, max_value)
+            
+            return render_template('index.html', user_data=data)
+        else:
+            return jsonify({"error":"wrong file"})
+
+
+@app.errorhandler(404)
+def handle_404_error(_error):
+    return make_response(jsonify({"error":"Not found"}),404)
 
 
 if __name__ == '__main__':
