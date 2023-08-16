@@ -7,6 +7,8 @@ import io
 from werkzeug.utils import secure_filename
 from PIL import Image
 import numpy as np
+from flask import url_for
+
 
 
 # Loading model from file
@@ -51,9 +53,23 @@ def get_pred(model,image_path):
 # Handling the uploaded file
 def file_handler(file):
 
+
      # Save the uploaded file to a temporary location
     file_name = secure_filename(file.filename)
     file_path = f'static/temporary/{file_name}'
     file.save(file_path)
 
     return file_path, file_name
+
+
+def create_response(predictions, class_names, file_name, index_of_max_value, max_value):
+    
+    data = {
+        "pred": str(predictions),
+        "class_names": class_names,
+        "uploaded_image": url_for('static', filename=f'temporary/{file_name}'),
+        "max": f"{class_names[str(index_of_max_value)]}",
+        "max_value":max_value
+    }
+
+    return data
