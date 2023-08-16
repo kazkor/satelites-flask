@@ -1,5 +1,5 @@
-from flask import Flask, request, render_template, jsonify, url_for
-from model import get_model, get_pred,get_classes, file_handler
+from flask import Flask, request, render_template, jsonify, url_for, make_response
+from model import get_model, get_pred,get_classes, file_handler,create_response
 import numpy as np
 import time
 import os
@@ -22,6 +22,11 @@ def home():
                     
     return render_template('index.html',user_data = data)
 
+@app.errorhandler(404)
+def handle_404_error(_error):
+    return make_response(jsonify({"error":"Not found"}),404)
+
+
 # Upload
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -35,14 +40,7 @@ def upload_file():
     # getting predictions
     predictions, index_of_max_value, max_value = get_pred(model=model, image_path=file_path)
 
-    # creating response json
-    data = {
-        "pred": str(predictions),
-        "class_names": class_names,
-        "uploaded_image": url_for('static', filename=f'temporary/{file_name}'),
-        "max": f"{class_names[str(index_of_max_value)]}",
-        "max_value":max_value
-    }
+    data = create_response(predictions, class_names, file_name, index_of_max_value, max_value)
     
     return render_template('index.html', user_data=data)
 
