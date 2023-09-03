@@ -39,14 +39,17 @@ The dataset was limited to a subset containing 20 classes from 45 provided. Ever
 
 ## Stack
 
-**flask** web app
-**tensorflow**: loading data, preprocessing data, cnn, callbacks.
-**matplotlib**: plotting pictures, losses and accuracies of the model.
-**seaborn**: confusion matrix heatmap.
-**numpy**: preparing test score to confussion matrix.
-**sklearn**: confusion matrix.
-**itertools**: preparation data to visualize number of classes
-**PIL** images
+## Stack
+
+- **flask**: web app
+- **tensorflow**: loading data, preprocessing data, cnn, callbacks.
+- **matplotlib**: plotting pictures, losses and accuracies of the model.
+- **seaborn**: confusion matrix heatmap.
+- **numpy**: preparing test score to confusion matrix.
+- **sklearn**: confusion matrix.
+- **itertools**: preparation data to visualize the number of classes
+- **PIL**: images
+
 
 ## Example
 
