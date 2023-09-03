@@ -38,8 +38,8 @@ def upload_file():
         # fetching file from client request
         file = request.files['file']
 
-        if file.filename == '':
-            return jsonify({"error":"no file"})
+        if 'file' not in request.files:
+            return make_response("Bad Request: No file provided", 400)
             
         if file and allowed_file(file.filename):
 
@@ -54,7 +54,7 @@ def upload_file():
             
             return render_template('index.html', user_data=data)
         else:
-            return jsonify({"error":"wrong file"})
+             return make_response("Bad Request: Invalid file type", 400)
 
 
 @app.errorhandler(404)
