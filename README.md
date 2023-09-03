@@ -55,6 +55,15 @@ The dataset was limited to a subset containing 20 classes from 45 provided. Ever
 
 ![](app/static/main_page.png)
 
+
+## About model
+
+#### Training
+![](app/static/training_process.png)
+
+#### Confussion Matrix
+![](app/static/con_matrix.png)
+
 ## TODO
 
 ** scale verification
