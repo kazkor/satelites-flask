@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Satelite Pictures Classifier</title>
+    <title>Satellite Pictures Classifier</title>
     <link rel="stylesheet" href="static/styles.css">
+    <style>
+        .column {
+            float: left;
+            width: 50%;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="left-column">
-            <h1>Satelite Pictures Classifier</h1>
+            <h1>Satellite Pictures Classifier</h1>
             <p>Upload your picture to get prediction!</p>
             
             <form action="/upload" method="post" enctype="multipart/form-data">
@@ -19,22 +25,36 @@
             <img src="{{ user_data.uploaded_image }}" alt="Uploaded Image">
         </div>
         <div class="right-column">
-            <h3>Class Names:</h3>
-            <ul>
-                {% set class_name_list = user_data.class_names.values()|list %}
-                {% set predictions_list = user_data.pred.strip('[]').split() %}
+            <h3>Prediction: {{ user_data.max }} : {{ user_data.max_value }}%</h3>
+            <div class="column">
+                <ul>
+                    {% set class_name_list = user_data.class_names.values()|list %}
+                    {% set predictions_list = user_data.pred.strip('[]').split() %}
 
-                {% if class_name_list|length >= 20 %}
-                    <ul>
-                        {% for index in range(20) %}
-                            {% set prediction_value = predictions_list[index]|float %}
-                            {% set formatted_prediction = "%.4f" % prediction_value %}
-                            <li>{{ class_name_list[index] }} : {{ formatted_prediction }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </ul>
-            <p>Max: {{ user_data.max }} : {{ user_data.max_value }}%</p>
+                    {% if class_name_list|length >= 20 %}
+                        <ul>
+                            {% for index in range(0, 10) %}
+                                {% set prediction_value = predictions_list[index]|float %}
+                                {% set formatted_prediction = "%.3f" % prediction_value %}
+                                <li>{{ class_name_list[index] }} : {{ formatted_prediction }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="column">
+                <ul>
+                    {% if class_name_list|length >= 20 %}
+                        <ul>
+                            {% for index in range(10, 20) %}
+                                {% set prediction_value = predictions_list[index]|float %}
+                                {% set formatted_prediction = "%.3f" % prediction_value %}
+                                <li>{{ class_name_list[index] }} : {{ formatted_prediction }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
 </body>

@@ -65,4 +65,4 @@ def handle_404_error(_error):
 if __name__ == '__main__':
     class_names = get_classes()
     model = get_model()
-    app.run(debug=True,port=8000)
+    app.run(debug=True,port=8001)
