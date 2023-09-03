@@ -27,7 +27,8 @@ cd app
 pip install -r requirements.txt
 ```
 
-4. Run the app
+4. Run the web app
+
 ```bash
 python app.py
 ```
@@ -46,3 +47,11 @@ The dataset was limited to a subset containing 20 classes from 45 provided. Ever
 **sklearn**: confusion matrix.
 **itertools**: preparation data to visualize number of classes
 **PIL** images
+
+## Example
+
+![](app/static/main_page.png)
+
+## TODO
+
+** scale verification
