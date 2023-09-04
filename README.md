@@ -16,7 +16,7 @@ cd satelites-flask
 2. Set up a virtual environment (optional but recommended):
 
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
@@ -50,18 +50,18 @@ The dataset was limited to a subset containing 20 classes from 45 provided. Ever
 - **itertools**: preparation data to visualize the number of classes
 - **PIL**: images
 
-
 ## Example
 
 ![](app/static/main_page.png)
 
-
 ## About model
 
 #### Training
+
 ![](app/static/training_process.png)
 
 #### Confussion Matrix
+
 ![](app/static/con_matrix.png)
 
 ## TODO
